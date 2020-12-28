@@ -134,7 +134,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                 Backendless.UserService.logout(new AsyncCallback<Void>() {
                     @Override
                     public void handleResponse(Void response) {
-                        Toast.makeText(MainActivity.this, "logOut", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
