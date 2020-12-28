@@ -34,7 +34,8 @@ OR
 
 ### Registration And Login
 
-![image](https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224527.png =36x78)
+  <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224527.png" alt="image" width="90" height="195">
+
 
 - If Your using app for first-time(new user), click On **REGISTER BUTTON** to create User Account.
 - Fillup All Required Fileds to get Registered As a new user.
