@@ -34,14 +34,16 @@ OR
 
 ### Registration And Login
 
-  <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224527.png" alt="image" width="90" height="195">
-
-
+ 
 - If Your using app for first-time(new user), click On **REGISTER BUTTON** to create User Account.
 - Fillup All Required Fileds to get Registered As a new user.
+
+ <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224527.png" alt="image" width="288" height="624">
+ 
 - Make Sure Email Address your Entering is not already Registered.
 
-![image](https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224535.png)
+<img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224535.png" alt="image" width="288" height="624">
+
 
 - After Registration Login With Your Valid user Credentials.
 - If you Forget Your Password CLick On **Forget Password** Link, Instructions To Rest Password will be sent to your Email.
