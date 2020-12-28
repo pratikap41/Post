@@ -4,7 +4,7 @@
 ___
 
 ## Contact
-[![]()](https://www.linkedin.com/in/pratik-patil-9a14a71b3) | [![]()](https://twitter.com/Pratikap41?s=08) | []() pratikap41@gmail.com
+[![](https://github.com/pratikap41/Post/blob/master/ExternalAssets/Icons/icons8-linkedin-48.png)](https://www.linkedin.com/in/pratik-patil-9a14a71b3)  [![](https://github.com/pratikap41/Post/blob/master/ExternalAssets/Icons/icons8-twitter-48.png)](https://twitter.com/Pratikap41?s=08)  [![](https://github.com/pratikap41/Post/blob/master/ExternalAssets/Icons/icons8-gmail-48.png)](pratikap41@gmail.com)
 
 ___
 
@@ -74,7 +74,7 @@ ___
  - Tap On **CREATE POST BUTTON** at the bottom Post Feed.
  - Tap on **Image Icon** to upload image.
  - Fillup All required Entries and press **POST BUTTON**.
- - *Your Post Can be seen by all the users in the network.*
+ - *Your Post Will be Visible To all the users in the network*
 
 
  <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224927.png" alt="image" width="288" height="624"> <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224912.png" alt="image" width="288" height="624">
@@ -120,6 +120,8 @@ ___
 
 - Tap on **3-Dot menu** in top-right corner of Post feed page.
 - Tap on **Logout** to get Logged off.
+
+<img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_225208.png" alt="image" width="288" height="624">
 
 ---
 
