@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".CreatePost">
+
+    <RelativeLayout
+        android:id="@+id/ps_progressLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/ps_progressBar"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:indeterminate="true"
+            android:padding="10dp"
+            android:visibility="invisible"
+            app:indicatorColor="@color/colourPrimary" />
+
+        <TextView
+            android:id="@+id/ps_progressLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ps_progressBar"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            android:text="Loading...."
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/ps_createPostLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/ps_titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/ps_cardThumbnailCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="40dp">
+
+                <ImageView
+                    android:id="@+id/ps_cardThumbnail"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/card_thumbnail_1" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/ps_cardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/ps_cardThumbnailCard"
+                android:paddingStart="15dp"
+                android:text="TIMES OF INDIA"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ps_cardImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ps_titleBar"
+            android:layout_marginVertical="10dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="250dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/add_image_placeholder" />
+
+        <RelativeLayout
+            android:id="@+id/ps_contentLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ps_cardImage">
+
+            <EditText
+                android:id="@+id/ps_descriptionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/edittext_style"
+                android:hint="Post Header"
+                android:maxHeight="100dp"
+                android:minHeight="50dp"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/ps_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ps_descriptionHeader"
+                android:adjustViewBounds="true"
+                android:background="@drawable/edittext_style"
+                android:hint="Post Content"
+                android:maxHeight="200dp"
+                android:minHeight="100dp"
+                android:padding="10dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ps_buttonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ps_contentLayout"
+            android:layout_marginVertical="10dp"
+            android:gravity="center_horizontal">
+
+            <Button
+
+                android:id="@+id/ps_postButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/colourPrimary"
+                android:text="POST"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/ps_cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/colourPrimary"
+                android:text="CANCEL"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

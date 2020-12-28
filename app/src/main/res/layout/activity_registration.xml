@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registrationActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration">
+
+
+    <RelativeLayout
+        android:id="@+id/progressLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:indeterminate="true"
+            android:padding="10dp"
+            android:visibility="invisible"
+            app:indicatorColor="@color/colourPrimary" />
+
+        <TextView
+            android:id="@+id/progressLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressBar"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            android:text="Loading...."
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/registrationForm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/background_2">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="10dp"
+            android:src="@mipmap/ic_logo_round" />
+
+        <EditText
+            android:id="@+id/rg_nameEditText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="20dp"
+            android:hint="Enter your Name"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/rg_emailEditText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rg_nameEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="20dp"
+            android:hint="Enter Your Email Address"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/rg_passwordEditText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rg_emailEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="20dp"
+            android:hint="Create New Password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/rg_repeatPasswordEditText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rg_passwordEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="20dp"
+            android:hint="Confirm New Password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/rg_registrationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rg_repeatPasswordEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:layout_marginVertical="10dp"
+            android:backgroundTint="@color/black"
+            android:elevation="10dp"
+            android:text="REGISTER"
+            app:icon="@drawable/ic_add" />
+
+    </RelativeLayout>
+</RelativeLayout>
