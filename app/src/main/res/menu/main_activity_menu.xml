@@ -7,6 +7,10 @@
     <item
         android:id="@+id/readLaterOP"
         android:title="Read Later" />
+
+    <item
+        android:id="@+id/settingsOP"
+        android:title="Settings" />
     <item
         android:id="@+id/logoutOP"
         android:title="Logout" />

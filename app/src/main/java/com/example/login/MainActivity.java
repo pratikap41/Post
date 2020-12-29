@@ -160,6 +160,9 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
             case R.id.refreshOP:
                 loadPage();
+
+            case R.id.settingsOP:
+                startActivity(new Intent(MainActivity.this, Settings.class));
         }
         return false;
     }
