@@ -3,6 +3,7 @@ package com.example.login;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.view.View;
@@ -19,35 +20,33 @@ import java.util.List;
 
 public class ReadLater extends AppCompatActivity {
 
-    private View progressBar, progressBarLayout, progressBarLabel, fromLayout;//progress bar
+
     private RecyclerView cardsRecyclerView;
-    private ImageView reloadBTN;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private  RLCardsRecyclerView adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_later);
 
-        //progress bar
-        progressBar = findViewById(R.id.ma_progressBar);
-        progressBarLayout = findViewById(R.id.ma_progressLayout);
-        progressBarLabel = findViewById(R.id.ma_progressLabel);
-        fromLayout = findViewById(R.id.readLater);
-        showProgress(true);
-        cardsRecyclerView =findViewById(R.id.cardsRecyclerView);
-        reloadBTN = findViewById(R.id.reloadButton);
 
-        reloadBTN.setOnClickListener(new View.OnClickListener() {
+        cardsRecyclerView =findViewById(R.id.cardsRecyclerView);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        adapter = new RLCardsRecyclerView();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View v) {
-                ReadLater.this.recreate();
+            public void onRefresh() {
+                adapter.clear();
+                loadReadlaterFeed();
             }
         });
-
         loadReadlaterFeed();
 
     }
 
     private void loadReadlaterFeed(){
+        swipeRefreshLayout.setRefreshing(true);
         List<String> postIdList = new ArrayList<>();
         String whereClause = " userEmail =" + "'" + Server.currentUser.getEmail() + "'";
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
@@ -59,7 +58,9 @@ public class ReadLater extends AppCompatActivity {
                     for (int i = 0; i < response.size(); i++) {
                         postIdList.add(response.get(i).getPostId());
                     }
+
 //                TODO: improvement required in  where clause i.e whereClause2
+
                     String whereClause2 = "objectId  in(";
                     for (int i = 0; i < postIdList.size() - 1; i++) {
                         whereClause2 += ("'" + postIdList.get(i) + "'" + ",");
@@ -70,40 +71,32 @@ public class ReadLater extends AppCompatActivity {
                     Backendless.Data.of(Post.class).find(query, new AsyncCallback<List<Post>>() {
                         @Override
                         public void handleResponse(List<Post> response) {
-                            RLCardsRecyclerView adapter = new RLCardsRecyclerView();
                             adapter.setDataList(response);
                             cardsRecyclerView.setAdapter(adapter);
                             cardsRecyclerView.setLayoutManager(new LinearLayoutManager(ReadLater.this));
-                            showProgress(false);
+                            swipeRefreshLayout.setRefreshing(false);
                         }
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
-                            showProgress(false);
+                            swipeRefreshLayout.setRefreshing(false);
                             Toast.makeText(ReadLater.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
                 else {
-                    showProgress(false);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
-                showProgress(false);
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(ReadLater.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    //progress bar
-    public void showProgress(boolean show) {
-        fromLayout.setVisibility(show ? View.GONE : View.VISIBLE);
-        progressBarLayout.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBarLabel.setVisibility(show ? View.VISIBLE : View.GONE);
 
-    }
 }

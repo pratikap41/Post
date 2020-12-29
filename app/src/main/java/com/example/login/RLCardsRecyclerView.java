@@ -153,6 +153,11 @@ public class RLCardsRecyclerView extends RecyclerView.Adapter<RLCardsRecyclerVie
         return dataList.size();
     }
 
+    void clear(){
+        dataList.clear();
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView cardTitleTV;
         private TextView cardSubTitleTV;

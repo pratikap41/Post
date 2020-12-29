@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
@@ -28,40 +31,46 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
 
-    private static  View progressBar, progressBarLayout, progressBarLabel, fromLayout;//progress bar
     private Uri profileURI;
     private String profileURL = "profile_images/";
     private ImageView profilePic;
-    private ImageView reloadBTN, homeBTN;
+    private ImageView  homeBTN, optionBTN;
     private RecyclerView cardsRecyclerView;
     private TextView nameVT, emailVT, postsVT;
     private   CardsRecyclerView adapter = new CardsRecyclerView();
     private  static  boolean profileChanged = false;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        progressBar = findViewById(R.id.p_progressBar);
-        progressBarLayout = findViewById(R.id.p_progressLayout);
-        progressBarLabel = findViewById(R.id.p_progressLabel);
-        fromLayout = findViewById(R.id.profile_layout);
-
         profilePic = findViewById(R.id.profilePic);
-        reloadBTN = findViewById(R.id.reloadButton);
         homeBTN = findViewById(R.id.homeButton);
         cardsRecyclerView = findViewById(R.id.p_cardsRecyclerView);
         nameVT = findViewById(R.id.p_name);
         emailVT = findViewById(R.id.p_email);
         postsVT = findViewById(R.id.posts);
-        cardsRecyclerView.setNestedScrollingEnabled(false);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        optionBTN = findViewById(R.id.optionsBTN);
 
-        showProgress(true);
         nameVT.setText(Server.currentUser.getProperty("name").toString());
         emailVT.setText(Server.currentUser.getEmail());
+
+
+        optionBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(Profile.this, v);
+                popup.inflate(R.menu.main_activity_menu);
+                popup.setOnMenuItemClickListener(Profile.this);
+                popup.show();
+            }
+        });
+
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,20 +88,19 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        reloadBTN.setOnClickListener(new View.OnClickListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View v) {
-                Profile.this.recreate();
+            public void onRefresh() {
+                adapter.clear();
+                loadProfile();
             }
         });
 
         loadProfile();
-        cardsRecyclerView.setAdapter(adapter);
-        cardsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void loadProfile() {
-        showProgress(true);
+        swipeRefreshLayout.setRefreshing(true);
         try{
             String profilePicURL = Server.currentUser.getProperty("profileImage").toString();
             Glide.with(this).load(Server.ImageUrl+ profileURL + Server.currentUser.getEmail()+".jpeg")
@@ -116,13 +124,15 @@ public class Profile extends AppCompatActivity {
                 String noOfPosts = "Total Posts : " + Integer.toString(response.size());
                 postsVT.setText(noOfPosts);
                 adapter.setDataList((ArrayList<Post>) response);
-                showProgress(false);
+                cardsRecyclerView.setAdapter(adapter);
+                cardsRecyclerView.setLayoutManager(new LinearLayoutManager(Profile.this));
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
                 Toast.makeText(Profile.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
-                showProgress(false);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -133,7 +143,6 @@ public class Profile extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == 1){
             try {
-                showProgress(true);
                 profileURI = data.getData();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), profileURI);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 20, new ByteArrayOutputStream());
@@ -152,18 +161,19 @@ public class Profile extends AppCompatActivity {
                 Backendless.UserService.update(Server.currentUser, new AsyncCallback<BackendlessUser>() {
                     @Override
                     public void handleResponse(BackendlessUser response) {
-                        showProgress(false);
+                        swipeRefreshLayout.setRefreshing(false);
                         profileChanged = true;
+                        Profile.this.recreate();
                     }
 
                     @Override
                     public void handleFault(BackendlessFault fault) {
                         Toast.makeText(Profile.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
-                        showProgress(false);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
             } catch (Exception e) {
-                showProgress(false);
+                swipeRefreshLayout.setRefreshing(false);
                 e.printStackTrace();
                 Toast.makeText(Profile.this, e.toString(), Toast.LENGTH_SHORT).show();
             }
@@ -171,12 +181,36 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    //progress bar
-    public static void showProgress(boolean show) {
-        fromLayout.setVisibility(show ? View.GONE : View.VISIBLE);
-        progressBarLayout.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBarLabel.setVisibility(show ? View.VISIBLE : View.GONE);
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logoutOP :
+                Backendless.UserService.logout(new AsyncCallback<Void>() {
+                    @Override
+                    public void handleResponse(Void response) {
+                        Toast.makeText(Profile.this, "Logged Out", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void handleFault(BackendlessFault fault) {
+                        Toast.makeText(Profile.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Profile.this.finish();
+                Intent intent = new Intent(Profile.this, Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finishAffinity();
+                break;
+
+            case R.id.readLaterOP:
+                startActivity(new Intent(Profile.this, ReadLater.class));
+
+            case R.id.refreshOP:
+                adapter.clear();
+                loadProfile();
+        }
+        return false;
     }
 }

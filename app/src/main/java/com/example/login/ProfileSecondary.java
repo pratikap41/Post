@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
@@ -30,40 +32,50 @@ import java.util.List;
 
 public class ProfileSecondary extends AppCompatActivity {
 
-    private static  View progressBar, progressBarLayout, progressBarLabel, fromLayout;//progress bar
 
     private BackendlessUser profileUser;
     private Uri profileURI;
     private String profileURL = "profile_images/";
     private ImageView profilePic;
-    private ImageView reloadBTN, homeBTN;
+    private ImageView  homeBTN, optionsBTN;
     private RecyclerView cardsRecyclerView;
     private TextView nameVT, emailVT, postsVT, youtPostTV;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private   CardsRecyclerView adapter = new CardsRecyclerView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_secondary);
+        setContentView(R.layout.activity_profile);
 
-        progressBar = findViewById(R.id.p_progressBar);
-        progressBarLayout = findViewById(R.id.p_progressLayout);
-        progressBarLabel = findViewById(R.id.p_progressLabel);
-        fromLayout = findViewById(R.id.profile_layout);
 
         profilePic = findViewById(R.id.profilePic);
-        reloadBTN = findViewById(R.id.reloadButton);
         homeBTN = findViewById(R.id.homeButton);
         cardsRecyclerView = findViewById(R.id.p_cardsRecyclerView);
         nameVT = findViewById(R.id.p_name);
         emailVT = findViewById(R.id.p_email);
         postsVT = findViewById(R.id.posts);
         youtPostTV = findViewById(R.id.yourPostTxt);
-        cardsRecyclerView.setNestedScrollingEnabled(false);
+        optionsBTN = findViewById(R.id.optionsBTN);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
 
-        showProgress(true);
+        optionsBTN.setVisibility(View.INVISIBLE);
+        homeBTN.setVisibility(View.INVISIBLE);
         youtPostTV.setText("Posts");
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.clear();
+                loadUser();
+            }
+        });
+        loadUser();
+    }
+
+    private void loadUser(){
+        swipeRefreshLayout.setRefreshing(true);
         String userEmail = getIntent().getStringExtra("userID");
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
         queryBuilder.setWhereClause("email = "+"'" + userEmail+"'");
@@ -74,31 +86,19 @@ public class ProfileSecondary extends AppCompatActivity {
                     profileUser = response.get(0);
                     nameVT.setText(profileUser.getProperty("name").toString());
                     emailVT.setText(userEmail);
-                    reloadBTN.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            ProfileSecondary.this.recreate();
-                        }
-                    });
-
                     loadProfile();
-                    cardsRecyclerView.setAdapter(adapter);
-                    cardsRecyclerView.setLayoutManager(new LinearLayoutManager(ProfileSecondary.this));
                 }
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(ProfileSecondary.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
     }
 
     private void loadProfile() {
-        showProgress(true);
         try{
             String profilePicURL = profileUser.getProperty("profileImage").toString();
             Glide.with(this).load(Server.ImageUrl+ profileURL + profileUser.getEmail()+".jpeg")
@@ -113,34 +113,29 @@ public class ProfileSecondary extends AppCompatActivity {
         }
 
         String whereClause = "email = " + "'" + profileUser.getEmail()+"'";
-        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.setGroupBy("created");
-        queryBuilder.setWhereClause(whereClause);
-        Backendless.Data.of(Post.class).find(queryBuilder, new AsyncCallback<List<Post>>() {
+        DataQueryBuilder queryBuilder2 = DataQueryBuilder.create();
+        queryBuilder2.setGroupBy("created");
+        queryBuilder2.setWhereClause(whereClause);
+        Backendless.Data.of(Post.class).find(queryBuilder2, new AsyncCallback<List<Post>>() {
             @Override
             public void handleResponse(List<Post> response) {
                 String noOfPosts = "Total Posts : " + Integer.toString(response.size());
                 postsVT.setText(noOfPosts);
                 adapter.setDataList((ArrayList<Post>) response);
-                showProgress(false);
+                cardsRecyclerView.setAdapter(adapter);
+                cardsRecyclerView.setLayoutManager(new LinearLayoutManager(ProfileSecondary.this));
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
                 Toast.makeText(ProfileSecondary.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
-                showProgress(false);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
     }
 
 
-    //progress bar
-    public static void showProgress(boolean show) {
-        fromLayout.setVisibility(show ? View.GONE : View.VISIBLE);
-        progressBarLayout.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBarLabel.setVisibility(show ? View.VISIBLE : View.GONE);
 
-    }
 }

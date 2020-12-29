@@ -1,4 +1,4 @@
-# Post
+# Post v.1.1.0
 ---
 ##### Post is a Social Media App for Android with Simplistic UI.
 ___
@@ -61,7 +61,8 @@ ___
 - You can save post to read Later by pressing **READ LATER BUTTON** On perticular post card.
 - You can expand the card to read complete Story by tapping on **MORE BUTTON**.
 - You can Tap on User-Name(CardTitle) To check profile of that user. 
-- tap on **Reload icon** in top-right corner of page To update your feed.
+- Swipe Down/Pull Down to reload your feed Or
+- 3 dot Menu > refresh
 
 
 
@@ -85,7 +86,7 @@ ___
  ## How to Access Read Later Section?
 
 
- - Tap on **3-Dot menu** in top-right corner of Post feed page.
+ - Tap on **3-Dot menu** in top-right corner of Post feed page or Your Profile page.
  - Select **Read Later** option to checkout **saved post**.
  - You Can remove post from read Later section by taping on **REMOVE BUTTON**.
 
@@ -111,7 +112,7 @@ ___
 
 - Tap on your **profile photo(placeholder)** in **Profile page**.
 - Choose Photo From Gallery.
-- Reload profile for effect to take place.
+- Reload profile by Swiping Down for effect to take place.
 - *Restart Your App if your unable to see your upadte profile photo.*
 - *If problem persists even after app restart, try to clear app data from system settings.*
 
@@ -119,8 +120,8 @@ ___
 
 ## Logout
 
-- Tap on **3-Dot menu** in top-right corner of Post feed page.
-- Tap on **Logout** to get Logged off.
+- Tap on **3-Dot menu** in top-right corner of Post feed Or Profile.
+- Then Select  **Logout** Option to get Logged off.
 
 <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_225208.png" alt="image" width="288" height="624">
 
