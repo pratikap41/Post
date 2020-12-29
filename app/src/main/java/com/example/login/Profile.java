@@ -82,7 +82,7 @@ public class Profile extends AppCompatActivity {
         reloadBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadProfile();
+                Profile.this.recreate();
             }
         });
 

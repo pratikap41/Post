@@ -77,7 +77,7 @@ public class ProfileSecondary extends AppCompatActivity {
                     reloadBTN.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            loadProfile();
+                            ProfileSecondary.this.recreate();
                         }
                     });
 

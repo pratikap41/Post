@@ -39,8 +39,7 @@ public class ReadLater extends AppCompatActivity {
         reloadBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showProgress(true);
-                loadReadlaterFeed();
+                ReadLater.this.recreate();
             }
         });
 

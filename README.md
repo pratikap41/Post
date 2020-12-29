@@ -48,6 +48,7 @@ OR
  <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224527.png" alt="image" width="288" height="624">           <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/IMG_20201228_224535.png" alt="image" width="288" height="624">
  
 - Make Sure Email Address your Entering is not already Registered.
+- **Confirm Your Email Address from the link sent to your Email Address, otherwise you will not be able to Login.**
 - After Registration Login With Your Valid user Credentials.
 - If you Forget Your Password CLick On **Forget Password** Link, Instructions To Rest Password will be sent to your Email.
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
@@ -27,17 +28,19 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
     private RecyclerView cardsRV;
     private View createPostBTN;
     private CardsRecyclerView adapter;
-    private ImageView reloadBTN, profileBTN, optionsBTN;
+    private ImageView profileBTN, optionsBTN;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         cardsRV = findViewById(R.id.cardsRecyclerView);
         createPostBTN = findViewById(R.id.createPostButton);
-        reloadBTN = findViewById(R.id.reloadButton);
         profileBTN = findViewById(R.id.profileButton);
         optionsBTN = findViewById(R.id.optionsBTN);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         adapter = new CardsRecyclerView();
 
         //progress bar
@@ -46,13 +49,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         progressBarLabel = findViewById(R.id.ma_progressLabel);
         fromLayout = findViewById(R.id.mainActivityLayout);
 
-        showProgress(true);
-        reloadBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reload();
-            }
-        });
+        loadPage();
 
         profileBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,22 +58,21 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
             }
         });
 
-        Backendless.Data.of(Post.class).find(new AsyncCallback<List<Post>>() {
-            @Override
-            public void handleResponse(List<Post> response) {
-                adapter.setDataList((ArrayList<Post>) response);
-                showProgress(false);
-            }
-
-            @Override
-            public void handleFault(BackendlessFault fault) {
-                showProgress(false);
-                Toast.makeText(MainActivity.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        cardsRV.setAdapter(adapter);
-        cardsRV.setLayoutManager(new LinearLayoutManager(this));
+//        Backendless.Data.of(Post.class).find(new AsyncCallback<List<Post>>() {
+//            @Override
+//            public void handleResponse(List<Post> response) {
+//                adapter.setDataList((ArrayList<Post>) response);
+//                cardsRV.setAdapter(adapter);
+//                cardsRV.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//
+//            @Override
+//            public void handleFault(BackendlessFault fault) {
+//                swipeRefreshLayout.setRefreshing(false);
+//                Toast.makeText(MainActivity.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         createPostBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +80,6 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                 startActivity(new Intent(MainActivity.this, CreatePost.class));
             }
         });
-
 
         optionsBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,22 +91,33 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
             }
         });
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.clear();
+                loadPage();
+            }
+        });
+
     }
 
-    private void reload() {
-        showProgress(true);
+    private void loadPage() {
+        swipeRefreshLayout.setRefreshing(true);
+        adapter.clear();
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
         queryBuilder.setSortBy("created");
         Backendless.Data.of(Post.class).find(queryBuilder, new AsyncCallback<List<Post>>() {
             @Override
             public void handleResponse(List<Post> response) {
                 adapter.setDataList((ArrayList<Post>) response);
-                showProgress(false);
+                cardsRV.setAdapter(adapter);
+                cardsRV.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
-                showProgress(false);
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(MainActivity.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -124,7 +130,6 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         progressBarLayout.setVisibility(show ? View.VISIBLE : View.GONE);
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         progressBarLabel.setVisibility(show ? View.VISIBLE : View.GONE);
-
     }
 
     @Override
@@ -152,6 +157,9 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
             case R.id.readLaterOP:
                 startActivity(new Intent(MainActivity.this, ReadLater.class));
+
+            case R.id.refreshOP:
+                loadPage();
         }
         return false;
     }

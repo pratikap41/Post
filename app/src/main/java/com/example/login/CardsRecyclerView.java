@@ -144,6 +144,11 @@ public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.Vi
 
     }
 
+    void clear(){
+        dataList.clear();
+        notifyDataSetChanged();
+    }
+
     public void setDataList(ArrayList<Post> dataList) {
         this.dataList = dataList;
         notifyDataSetChanged();
