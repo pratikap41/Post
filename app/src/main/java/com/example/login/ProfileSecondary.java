@@ -114,7 +114,7 @@ public class ProfileSecondary extends AppCompatActivity {
 
         String whereClause = "email = " + "'" + profileUser.getEmail()+"'";
         DataQueryBuilder queryBuilder2 = DataQueryBuilder.create();
-        queryBuilder2.setGroupBy("created");
+        queryBuilder2.setSortBy("created DESC");
         queryBuilder2.setWhereClause(whereClause);
         Backendless.Data.of(Post.class).find(queryBuilder2, new AsyncCallback<List<Post>>() {
             @Override

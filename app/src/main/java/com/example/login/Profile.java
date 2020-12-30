@@ -116,7 +116,7 @@ public class Profile extends AppCompatActivity implements PopupMenu.OnMenuItemCl
 
         String whereClause = "email = " + "'" + Server.currentUser.getEmail()+"'";
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.setGroupBy("created");
+        queryBuilder.setSortBy("created DESC");
         queryBuilder.setWhereClause(whereClause);
         Backendless.Data.of(Post.class).find(queryBuilder, new AsyncCallback<List<Post>>() {
             @Override
@@ -206,10 +206,11 @@ public class Profile extends AppCompatActivity implements PopupMenu.OnMenuItemCl
 
             case R.id.readLaterOP:
                 startActivity(new Intent(Profile.this, ReadLater.class));
-
+                break;
             case R.id.refreshOP:
                 adapter.clear();
                 loadProfile();
+                break;
         }
         return false;
     }

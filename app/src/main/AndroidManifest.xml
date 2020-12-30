@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Login.Base">
-        <activity android:name=".Version"></activity>
+        <activity android:name=".ChangePassword"
+            android:theme="@style/Theme.Login.NoActionBar"/>
+        <activity android:name=".Version" />
         <activity
             android:name=".Settings"
             android:theme="@style/Theme.Login.NoActionBar" />

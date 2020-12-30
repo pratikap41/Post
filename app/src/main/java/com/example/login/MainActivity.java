@@ -105,7 +105,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         swipeRefreshLayout.setRefreshing(true);
         adapter.clear();
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.setSortBy("created");
+        queryBuilder.setSortBy("created DESC");
         Backendless.Data.of(Post.class).find(queryBuilder, new AsyncCallback<List<Post>>() {
             @Override
             public void handleResponse(List<Post> response) {
@@ -157,12 +157,13 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
             case R.id.readLaterOP:
                 startActivity(new Intent(MainActivity.this, ReadLater.class));
-
+                break;
             case R.id.refreshOP:
                 loadPage();
-
+                break;
             case R.id.settingsOP:
                 startActivity(new Intent(MainActivity.this, Settings.class));
+                break;
         }
         return false;
     }

@@ -18,7 +18,7 @@ import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.local.UserIdStorageFactory;
 
 public class Login extends AppCompatActivity {
-    private View progressBar, progressBarLayout, progressBarLabel, fromLayout;
+    private View progressBar, progressBarLayout, progressBarLabel, fromLayout;//progress bar
     private EditText userNameET, passwordET;
     private TextView resetPasswordTV;
     private Button loginButton, registrationButton;
@@ -28,10 +28,14 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //progress bar
         progressBar = findViewById(R.id.progressBar);
         progressBarLayout = findViewById(R.id.progressLayout);
         progressBarLabel = findViewById(R.id.progressLabel);
         fromLayout = findViewById(R.id.loginActivityForm);
+
+
         registrationButton = findViewById(R.id.registerButton);
         userNameET = findViewById(R.id.userNameEditText);
         passwordET = findViewById(R.id.passwordEditText);

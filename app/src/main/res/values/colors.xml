@@ -17,4 +17,5 @@
     <color name="colourDivider">#BDBDBD</color>
     <color name="colourAccent">#536DFE</color>
     <color name="linkBlue">#0B0080</color>
+    <color name="red">#FF0000</color>
 </resources>

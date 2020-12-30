@@ -67,6 +67,7 @@ public class ReadLater extends AppCompatActivity {
                     }
                     whereClause2 += "'" + postIdList.get(postIdList.size() - 1) + "'" + ")";
                     DataQueryBuilder query = DataQueryBuilder.create();
+                    query.setSortBy("created DESC");
                     query.setWhereClause(whereClause2);
                     Backendless.Data.of(Post.class).find(query, new AsyncCallback<List<Post>>() {
                         @Override
