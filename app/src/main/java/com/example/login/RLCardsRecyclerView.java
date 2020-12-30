@@ -22,7 +22,9 @@ import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RLCardsRecyclerView extends RecyclerView.Adapter<RLCardsRecyclerView.ViewHolder> {
 
@@ -53,7 +55,7 @@ public class RLCardsRecyclerView extends RecyclerView.Adapter<RLCardsRecyclerVie
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         holder.cardTitleTV.setText(dataList.get(position).getName());
-        holder.cardSubTitleTV.setText(formatter.format(dataList.get(position).getCreated()));
+        holder.cardSubTitleTV.setText(getDuration(dataList.get(position).getCreated()));
         holder.descriptionHeaderTV.setText((dataList.get(position).getDescriptionTitle()));
         String content = dataList.get(position).getContent();
         holder.descriptionTV.setText(content.substring(0, Math.min(content.length(), 100)));
@@ -157,6 +159,45 @@ public class RLCardsRecyclerView extends RecyclerView.Adapter<RLCardsRecyclerVie
         dataList.clear();
         notifyDataSetChanged();
     }
+
+    private String getDuration(Date date){
+        Date now = new Date();
+        long duration = TimeUnit.MILLISECONDS.toSeconds( now.getTime() - date.getTime());
+        final long MIN = 60;
+        final long HOUR = 3600;
+        final long DAYS = 86400;
+        final long WEEK = 604800;
+        final long MONTH = 2628002;
+        final long YEAR = 31536000;
+        String returnValue;
+
+        if(duration < MIN){
+            return Long.toString(duration) + " Seconds Ago";
+        }
+        else if(duration< HOUR ){
+            returnValue = Long.toString(TimeUnit.SECONDS.toMinutes(duration));
+            return returnValue + " Minutes ago ";
+        }
+        else if(duration < DAYS){
+            returnValue = Long.toString(TimeUnit.SECONDS.toHours(duration));
+            return returnValue + " Hours ago ";
+        }
+        else if(duration < WEEK){
+            returnValue = Long.toString(TimeUnit.SECONDS.toDays(duration));
+            return returnValue + " Day ago ";
+        }
+        else if(duration < MONTH ){
+            returnValue = Long.toString(duration / WEEK) ;
+            return returnValue + " Weeks ago ";
+        }
+        else if(duration < YEAR){
+            returnValue = Long.toString(duration / MONTH) ;
+            return returnValue + " Months ago ";
+        }
+        returnValue = Long.toString(duration / YEAR) ;
+        return  returnValue + " Years ago";
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView cardTitleTV;

@@ -59,9 +59,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cardTitle"
                     android:layout_toRightOf="@+id/cardThumbnailCard"
-                    android:paddingStart="13dp"
+                    android:paddingStart="12dp"
                     android:text="20 min ago"
-                    android:textStyle="bold" />
+                     />
 
             </RelativeLayout>
 
