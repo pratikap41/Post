@@ -7,36 +7,7 @@
     android:padding="10dp"
     tools:context=".CreatePost">
 
-    <RelativeLayout
-        android:id="@+id/ps_progressLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="10dp"
-        android:visibility="gone">
-
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/ps_progressBar"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_centerInParent="true"
-            android:layout_margin="10dp"
-            android:indeterminate="true"
-            android:padding="10dp"
-            android:visibility="invisible"
-            app:indicatorColor="@color/colourPrimary" />
-
-        <TextView
-            android:id="@+id/ps_progressLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ps_progressBar"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:padding="10dp"
-            android:text="Loading...."
-            android:visibility="gone" />
-    </RelativeLayout>
+    <include layout="@layout/progress_bar" />
 
 
     <RelativeLayout
@@ -101,6 +72,7 @@
                 android:layout_marginVertical="10dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/edittext_style"
+                android:gravity="top"
                 android:hint="Post Header"
                 android:maxHeight="100dp"
                 android:minHeight="50dp"
@@ -113,6 +85,7 @@
                 android:layout_below="@+id/ps_descriptionHeader"
                 android:adjustViewBounds="true"
                 android:background="@drawable/edittext_style"
+                android:gravity="top"
                 android:hint="Post Content"
                 android:maxHeight="200dp"
                 android:minHeight="100dp"

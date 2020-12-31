@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:theme="@style/Theme.Login.NoActionBar"
-    tools:context=".ChangePassword">
+    tools:context=".Feedback">
 
-    <include layout="@layout/app_topbar"/>
+    <include layout="@layout/app_topbar" />
 
-    <include layout="@layout/progress_bar"/>
+    <include layout="@layout/progress_bar" />
 
     <LinearLayout
-        android:id="@+id/changePasswordLayout"
+        android:id="@+id/feedbackLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/curretPasswordET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Current Password"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/newPasswordET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Create New Password"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/confirmNewPasswordET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Confirm New Password"
-            android:inputType="textPassword" />
 
         <TextView
-            android:id="@+id/warningTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Comment "
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/fedbackComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text=""
-            android:textColor="@color/red" />
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="20dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/edittext_style"
+            android:gravity="top"
+            android:hint="Write Your Feedback Here"
+            android:maxHeight="400dp"
+            android:minHeight="250dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            android:text="Rating "
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/white"
+            android:numStars="5" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,13 +69,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/changePasswordBTN"
+                android:id="@+id/submitBTN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_weight="5"
                 android:backgroundTint="@color/colourPrimary"
-                android:text="CHANGE"
+                android:text="SUBMIT"
                 android:textStyle="bold" />
 
             <Button
@@ -80,7 +89,7 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-
     </LinearLayout>
+
 
 </LinearLayout>

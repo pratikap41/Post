@@ -52,6 +52,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/contactUs"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,6 +99,7 @@
 
 
     <LinearLayout
+        android:id="@+id/feedback"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

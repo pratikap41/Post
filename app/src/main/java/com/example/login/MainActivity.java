@@ -24,7 +24,6 @@ import java.util.List;
 public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickListener{
 
 
-    private View progressBar, progressBarLayout, progressBarLabel, fromLayout;//progress bar
     private RecyclerView cardsRV;
     private View createPostBTN;
     private CardsRecyclerView adapter;
@@ -43,11 +42,6 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         adapter = new CardsRecyclerView();
 
-        //progress bar
-        progressBar = findViewById(R.id.ma_progressBar);
-        progressBarLayout = findViewById(R.id.ma_progressLayout);
-        progressBarLabel = findViewById(R.id.ma_progressLabel);
-        fromLayout = findViewById(R.id.mainActivityLayout);
 
         loadPage();
 
@@ -124,13 +118,6 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
-    //progress bar
-    public void showProgress(boolean show) {
-        fromLayout.setVisibility(show ? View.GONE : View.VISIBLE);
-        progressBarLayout.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBarLabel.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {

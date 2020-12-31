@@ -23,10 +23,12 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
         progressBar = findViewById(R.id.progressBar);
         progressBarLayout = findViewById(R.id.progressLayout);
         progressBarLabel = findViewById(R.id.progressLabel);
         fromLayout = findViewById(R.id.registrationForm);
+
         nameET = findViewById(R.id.rg_nameEditText);
         emailET = findViewById(R.id.rg_emailEditText);
         passwordET = findViewById(R.id.rg_passwordEditText);

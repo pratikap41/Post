@@ -3,6 +3,7 @@ package com.example.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,7 +15,7 @@ import com.backendless.exceptions.BackendlessFault;
 
 public class Settings extends AppCompatActivity implements View.OnClickListener {
 
-    private  LinearLayout version, logout, changePassword;
+    private  LinearLayout version, logout, changePassword, feedback, contactUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +24,14 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         version = findViewById(R.id.version);
         logout = findViewById(R.id.logout);
         changePassword = findViewById(R.id.changePassword);
+        feedback = findViewById(R.id.feedback);
+        contactUs = findViewById(R.id.contactUs);
 
         logout.setOnClickListener(this);
         version.setOnClickListener(this);
+        feedback.setOnClickListener(this);
         changePassword.setOnClickListener(this);
+        contactUs.setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +47,15 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.changePassword:
                 startActivity(new Intent(Settings.this, ChangePassword.class));
+                break;
+            case R.id.feedback:
+                startActivity(new Intent(Settings.this, Feedback.class));
+                break;
+            case R.id.contactUs:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://github.com/pratikap41/Post/blob/master/README.md"));
+                startActivity(intent);
                 break;
 
 

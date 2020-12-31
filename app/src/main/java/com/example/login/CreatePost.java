@@ -31,9 +31,9 @@ public class CreatePost extends AppCompatActivity {
 
     static final int PICK_IMAGE = 1;
     private static boolean imageSelected = false; //to check if image is selected by user or not
-    Bitmap bitmap;
-    Button postBTN, cancelBTN;
-    Uri imageUri;
+    private Bitmap bitmap;
+    private Button postBTN, cancelBTN;
+    private Uri imageUri;
     private View progressBar, progressBarLayout, progressBarLabel, fromLayout;//progress bar
     private TextView cardTitleTV, cardsubTitleTV;
     private EditText descriptionHeaderET, descriptionET;
@@ -46,9 +46,9 @@ public class CreatePost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 //progress bar
-        progressBar = findViewById(R.id.ps_progressBar);
-        progressBarLayout = findViewById(R.id.ps_progressLayout);
-        progressBarLabel = findViewById(R.id.ps_progressLabel);
+        progressBar = findViewById(R.id.progressBar);
+        progressBarLayout = findViewById(R.id.progressLayout);
+        progressBarLabel = findViewById(R.id.progressLabel);
         fromLayout = findViewById(R.id.ps_createPostLayout);
 
         SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy_hhmmss");

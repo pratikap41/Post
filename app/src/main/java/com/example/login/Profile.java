@@ -211,6 +211,9 @@ public class Profile extends AppCompatActivity implements PopupMenu.OnMenuItemCl
                 adapter.clear();
                 loadProfile();
                 break;
+            case R.id.settingsOP:
+                startActivity(new Intent(Profile.this, Settings.class));
+                break;
         }
         return false;
     }

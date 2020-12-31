@@ -14,13 +14,15 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class ChangePassword extends AppCompatActivity {
 
     private View progressBar, progressBarLayout, progressBarLabel, fromLayout;//progress bar
     private EditText currentPasswordET, newPasswordET, confirmNewPasswordET;
     private TextView warningTV;
-    private Button changePasswordBTN;
+    private MaterialToolbar appTopBar;
+    private Button changePasswordBTN, cancelBTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +39,19 @@ public class ChangePassword extends AppCompatActivity {
         confirmNewPasswordET = findViewById(R.id.confirmNewPasswordET);
         warningTV = findViewById(R.id.warningTV);
         changePasswordBTN = findViewById(R.id.changePasswordBTN);
+        cancelBTN = findViewById(R.id.cancelBTN);
+        appTopBar = findViewById(R.id.appTopBar);
 
+        appTopBar.setTitle("Change Password");
         warningTV.setText("");
         ColorStateList colour = newPasswordET.getTextColors();
+
+        cancelBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangePassword.this.finish();
+            }
+        });
 
         changePasswordBTN.setOnClickListener(new View.OnClickListener() {
             @Override
