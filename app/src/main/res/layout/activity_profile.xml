@@ -44,14 +44,13 @@
             android:focusable="true"
             android:padding="10dp"
             android:src="@drawable/ic_home" />
-
     </RelativeLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_below="@+id/AppTopBar">
 
         <ScrollView
             android:layout_width="match_parent"
