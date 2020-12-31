@@ -92,7 +92,7 @@ ___
  - You Can remove post from read Later section by taping on **REMOVE BUTTON**.
 
 
- <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/goto_readlater" alt="image" width="288" height="624">          <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/readlater.png" alt="image" width="288" height="624">
+ <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/goto_readlater.png" alt="image" width="288" height="624">          <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/readlater.png" alt="image" width="288" height="624">
 
 
 ---
@@ -167,7 +167,7 @@ Or
 
 > 3 DOT MENU -> LOGOUT
 
-<img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/settings_logout" alt="image" width="288" height="624"> <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/logout" alt="image" width="288" height="624">
+<img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/settings_logout.png" alt="image" width="288" height="624"> <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/logout.png" alt="image" width="288" height="624">
 
 ---
 
