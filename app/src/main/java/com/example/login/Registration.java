@@ -13,11 +13,13 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class Registration extends AppCompatActivity {
     private View progressBar, progressBarLayout, progressBarLabel, fromLayout;
     private EditText nameET, emailET, passwordET, confirmPasswordET;
     private Button registerBTN;
+    private MaterialToolbar appTopBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,9 @@ public class Registration extends AppCompatActivity {
         passwordET = findViewById(R.id.rg_passwordEditText);
         confirmPasswordET = findViewById(R.id.rg_repeatPasswordEditText);
         registerBTN = findViewById(R.id.rg_registrationButton);
+        appTopBar = findViewById(R.id.appTopBar);
+
+        appTopBar.setTitle("REGISTRATION");
 
         registerBTN.setOnClickListener(new View.OnClickListener() {
             @Override

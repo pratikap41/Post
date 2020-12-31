@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textAlignment="center"
+    android:theme="@style/CustomTheme"
     tools:context=".MainActivity">
 
-    <include layout="@layout/progress_bar"/>
+    <include layout="@layout/app_topbar" />
 
+    <include layout="@layout/progress_bar" />
 
     <RelativeLayout
         android:id="@+id/loginActivityForm"
@@ -30,24 +32,26 @@
 
         <EditText
             android:id="@+id/userNameEditText"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/logo"
             android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="20dp"
             android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/passwordEditText"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/userNameEditText"
             android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="20dp"
             android:hint="Password"
-
             android:inputType="textPassword" />
+
 
         <LinearLayout
             android:id="@+id/buttonLayout"
@@ -91,7 +95,7 @@
             android:focusable="true"
             android:padding="10dp"
             android:text="Forget Password? Click Here.."
-            android:textColor="@color/linkBlue" />
+            android:textColor="@color/primary_text" />
 
 
     </RelativeLayout>

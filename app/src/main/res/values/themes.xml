@@ -1,6 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 
+    <style name="CustomTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimaryVariant">@color/primary_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="icon">@color/icons</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="divider">@color/divider</item>
+    </style>
+
+
     <style name="Theme.Login.NoActionBar" parent="Theme.MaterialComponents.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

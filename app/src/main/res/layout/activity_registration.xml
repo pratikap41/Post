@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".Registration">
 
-
+    <include layout="@layout/app_topbar"/>
     <include layout="@layout/progress_bar"/>
 
 

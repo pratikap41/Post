@@ -16,6 +16,7 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.local.UserIdStorageFactory;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class Login extends AppCompatActivity {
     private View progressBar, progressBarLayout, progressBarLabel, fromLayout;//progress bar
@@ -23,6 +24,7 @@ public class Login extends AppCompatActivity {
     private TextView resetPasswordTV;
     private Button loginButton, registrationButton;
     private ImageView logo;
+    private MaterialToolbar appTopBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class Login extends AppCompatActivity {
         passwordET = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         resetPasswordTV = findViewById(R.id.resetPasswordEditText);
+        appTopBar = findViewById(R.id.appTopBar);
+        appTopBar.setTitle("POST LOGIN");
 
         showProgress(true);
 

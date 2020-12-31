@@ -15,7 +15,7 @@ import com.backendless.exceptions.BackendlessFault;
 
 public class Settings extends AppCompatActivity implements View.OnClickListener {
 
-    private  LinearLayout version, logout, changePassword, feedback, contactUs;
+    private  LinearLayout version, logout, changePassword, feedback, contactUs, editProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +26,14 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         changePassword = findViewById(R.id.changePassword);
         feedback = findViewById(R.id.feedback);
         contactUs = findViewById(R.id.contactUs);
+        editProfile = findViewById(R.id.editProfile);
 
         logout.setOnClickListener(this);
         version.setOnClickListener(this);
         feedback.setOnClickListener(this);
         changePassword.setOnClickListener(this);
         contactUs.setOnClickListener(this);
+        editProfile.setOnClickListener(this);
     }
 
     @Override
@@ -57,7 +59,9 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 intent.setData(Uri.parse("https://github.com/pratikap41/Post/blob/master/README.md"));
                 startActivity(intent);
                 break;
-
+            case R.id.editProfile:
+                startActivity(new Intent(Settings.this, EditProfile.class));
+                break;
 
         }
     }

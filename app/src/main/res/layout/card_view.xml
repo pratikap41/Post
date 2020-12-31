@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/CustomTheme"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -42,7 +43,6 @@
                     android:layout_toRightOf="@+id/cardThumbnailCard"
                     android:paddingStart="15dp"
                     android:text="TIMES OF INDIA"
-                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -86,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:text="Burger King shares jump 265% in 4 days."
-                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
