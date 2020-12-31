@@ -147,7 +147,7 @@ ___
 
 > 3 DOT MENU -> Settings -> Version
 
-<img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/goto_settings.png" alt="image" width="288" height="624">   <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/settings_version.png" alt="image" width="288" height="624"> <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/Version.png" alt="image" width="288" height="624">
+<img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/goto_settings.png" alt="image" width="288" height="624">   <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/settings_version.png" alt="image" width="288" height="624"> <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/version.png" alt="image" width="288" height="624">
 
 ---
 
