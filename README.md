@@ -1,4 +1,4 @@
-# Post v1.1.1
+# Post v1.1.2
 ---
 
 ##### Post is a Social Media App for Android with Simplistic UI.

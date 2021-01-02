@@ -105,7 +105,7 @@ public class Profile extends AppCompatActivity implements PopupMenu.OnMenuItemCl
             String profilePicURL = Server.currentUser.getProperty("profileImage").toString();
             Glide.with(this).load(Server.ImageUrl+ profileURL + Server.currentUser.getEmail()+".jpeg")
                     .placeholder(R.mipmap.profile_placeholder)
-                    .fitCenter()
+                    .circleCrop()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(profileChanged)
                     .into(profilePic);

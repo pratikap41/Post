@@ -33,7 +33,7 @@
                         android:id="@+id/cardThumbnail"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/card_thumbnail_1" />
+                        android:src="@mipmap/profile_placeholder" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView

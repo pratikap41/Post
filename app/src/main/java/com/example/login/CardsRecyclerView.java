@@ -72,6 +72,10 @@ public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.Vi
                         public void handleResponse(List<BackendlessUser> response) {
                             try {
                                 CardsRecyclerView.thubnailUrl = response.get(0).getProperty("profileImage").toString();
+                                Glide.with(parent.getContext()).load(thubnailUrl)
+                                        .placeholder(R.mipmap.profile_placeholder)
+                                        .circleCrop()
+                                        .into(holder.thumbnail);
                             }
                             catch (Exception e){
                                 e.printStackTrace();
@@ -83,10 +87,6 @@ public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.Vi
                         }
                     });
 
-            Glide.with(parent.getContext()).load(thubnailUrl)
-                    .placeholder(R.mipmap.profile_placeholder)
-                    .centerCrop()
-                    .into(holder.thumbnail);
             Glide.with(parent.getContext())
                     .load(dataList.get(position).getCardImage())
                     .placeholder(R.mipmap.add_image_placeholder)
