@@ -11,7 +11,7 @@ ___
 
 ## Contribution And Suggestion
 
-All kinds of Suggestions And Contributions are always Welcomed.
+All kinds of Suggestions And Contributions are always Welcome.
 
 
 #### Clone Repository Using
@@ -43,15 +43,15 @@ OR
 ## Registration And Login
 
 
-- If Your using app for first-time(new user), click On **REGISTER BUTTON** to create New User Account.
-- Fillup All Required Fileds to get Registered As a new user.
+- If you are using app for the first-time(new user), click On **REGISTER BUTTON** to create New User Account.
+- *Fillup all required fileds to get registered as a new user.*
 
  <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/login.png" alt="image" width="288" height="624">           <img src="https://github.com/pratikap41/Post/blob/master/ExternalAssets/Images/registration.png" alt="image" width="288" height="624">
 
-- Make Sure Email Address your Entering is not already Registered.
+- Make Sure Email Address you are Entering is not already Registered.
 - ~~Confirm Your Email Address from the link sent to your Email Address, otherwise you will not be able to Login.~~
-- After Registration Login With Your Valid user Credentials.
-- If you Forget Your Password CLick On **Forget Password** Link, Instructions To Rest Password will be sent to your Email.
+- After Registration, Login With Your Valid User Credentials.
+- If you Forget Your Password Click On **Forget Password** Link, Instructions To Reset Password will be sent to your Email.
 
 ___
 
@@ -59,11 +59,10 @@ ___
 
 
 - Post Feed is a place where you can see Posts from users in the network.
-- You can save post to read Later by pressing **READ LATER BUTTON** On perticular post card.
+- You can save post to read Later by pressing **READ LATER BUTTON** on particular post card.
 - You can expand the card to read complete Story by tapping on **MORE BUTTON**.
-- You can Tap on User-Name(CardTitle) To check profile of that user.
-- Swipe Down/Pull Down to reload your feed Or
-- 3 dot Menu > refresh
+- You can Tap on User-Name(CardTitle) to check profile of that user.
+- Swipe Down/Pull Down to reload your feed *Or* 3 dot Menu > refresh
 
 
 
@@ -100,8 +99,8 @@ ___
 ## Profile
 
 
-- You can Access Your Profile By tapping on **Profile Icon** present at top-right corner of *FEED* activity.
-- On Profile page You Get *Your Name, Email, Number of Posts, Profile Pic and All your posts at one place.*
+- You can Access Your Profile by tapping on **Profile Icon** present at top-right corner of *FEED* activity.
+- On Profile page You Get *Your Name, Email, Number of Posts, Profile Picture and All your posts at one place.*
 - **Home Icon** in top-right corner can be used to return to *Feed*
 
 
