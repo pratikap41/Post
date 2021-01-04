@@ -125,6 +125,7 @@ public class Profile extends AppCompatActivity implements PopupMenu.OnMenuItemCl
                 postsVT.setText(noOfPosts);
                 adapter.setDataList((ArrayList<Post>) response);
                 cardsRecyclerView.setAdapter(adapter);
+                cardsRecyclerView.invalidate();
                 cardsRecyclerView.setLayoutManager(new LinearLayoutManager(Profile.this));
                 swipeRefreshLayout.setRefreshing(false);
             }

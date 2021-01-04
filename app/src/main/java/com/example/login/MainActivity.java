@@ -35,6 +35,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//  Inti View
         cardsRV = findViewById(R.id.cardsRecyclerView);
         createPostBTN = findViewById(R.id.createPostButton);
         profileBTN = findViewById(R.id.profileButton);
@@ -105,6 +106,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
             public void handleResponse(List<Post> response) {
                 adapter.setDataList((ArrayList<Post>) response);
                 cardsRV.setAdapter(adapter);
+                cardsRV.invalidate();
                 cardsRV.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 swipeRefreshLayout.setRefreshing(false);
             }

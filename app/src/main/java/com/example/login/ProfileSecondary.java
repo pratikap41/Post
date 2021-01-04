@@ -48,6 +48,12 @@ public class ProfileSecondary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        String userEmail = getIntent().getStringExtra("userID");
+
+        if(userEmail.equals(Server.currentUser.getEmail())){
+            startActivity(new Intent(ProfileSecondary.this, Profile.class));
+            ProfileSecondary.this.finish();
+        }
 
         profilePic = findViewById(R.id.profilePic);
         homeBTN = findViewById(R.id.homeButton);
@@ -123,6 +129,7 @@ public class ProfileSecondary extends AppCompatActivity {
                 postsVT.setText(noOfPosts);
                 adapter.setDataList((ArrayList<Post>) response);
                 cardsRecyclerView.setAdapter(adapter);
+                cardsRecyclerView.invalidate();
                 cardsRecyclerView.setLayoutManager(new LinearLayoutManager(ProfileSecondary.this));
                 swipeRefreshLayout.setRefreshing(false);
             }

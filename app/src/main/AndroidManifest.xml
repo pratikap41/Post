@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/CustomTheme">
         <activity android:name=".EditProfile" />
+        <activity android:name=".EditPost" />
         <activity android:name=".Feedback" />
         <activity android:name=".ChangePassword" />
         <activity android:name=".Version" />

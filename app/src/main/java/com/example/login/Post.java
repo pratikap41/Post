@@ -1,8 +1,9 @@
 package com.example.login;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Post {
+public class Post implements Serializable {
 
     private String email;
     private String name;

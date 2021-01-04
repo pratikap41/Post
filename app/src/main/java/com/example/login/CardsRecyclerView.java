@@ -1,11 +1,17 @@
 package com.example.login;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.ViewHolder> {
+public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.ViewHolder> implements PopupMenu.OnMenuItemClickListener{
 
     private static ViewGroup parent;
     private SimpleDateFormat formatter;
@@ -50,20 +56,61 @@ public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.Vi
         String content = dataList.get(position).getContent();
         holder.descriptionTV.setText(content.substring(0, Math.min(content.length(), 100)));
 
+//        MENU CONTROLLER
+        PopupMenu popupMenu = new PopupMenu(parent.getContext(), holder.optionBTN);
+        popupMenu.inflate(R.menu.card_menu);
+        Menu popup = popupMenu.getMenu();
+        if(!dataList.get(position).getEmail().equals(Server.currentUser.getEmail())){
+            popup.findItem(R.id.deletePostOP).setVisible(false);
+            popup.findItem(R.id.editPostOP).setVisible(false);
+        }
+        holder.optionBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupMenu.show();
+            }
+        });
 
-//        thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(dataList.get(position).getCardImage()).getContent());
-//                    holder.cardImage.setImageBitmap(bitmap);
-//                }
-//                catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//        thread.start();
+        popup.findItem(R.id.editPostOP).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(parent.getContext(), EditPost.class);
+                intent.putExtra("post" ,dataList.get(position));
+                parent.getContext().startActivity(intent);
+                return false;
+            }
+        });
+
+        popup.findItem(R.id.deletePostOP).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                deletePost(holder, dataList.get(position));
+                return false;
+            }
+        });
+
+        popup.findItem(R.id.reportPostOP).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                ReportData reportData = new ReportData();
+                reportData.setPostID(dataList.get(position).getObjectId());
+                reportData.setReporter(Server.currentUser.getEmail());
+                Backendless.Data.of(ReportData.class).save(reportData, new AsyncCallback<ReportData>() {
+                    @Override
+                    public void handleResponse(ReportData response) {
+                        Toast.makeText(parent.getContext(), "Post Reported", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void handleFault(BackendlessFault fault) {
+                        Log.i("TAG", "handleFault: "+ fault.getMessage());
+                    }
+                });
+                return false;
+            }
+        });
+//
+
         try {
             DataQueryBuilder query = DataQueryBuilder.create();
             query.setWhereClause("email = " + "'"+dataList.get(position).getEmail()+"'");
@@ -71,6 +118,7 @@ public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.Vi
                         @Override
                         public void handleResponse(List<BackendlessUser> response) {
                             try {
+                                holder.cardTitleTV.setText(response.get(0).getProperty("name").toString());
                                 CardsRecyclerView.thubnailUrl = response.get(0).getProperty("profileImage").toString();
                                 Glide.with(parent.getContext()).load(thubnailUrl)
                                         .placeholder(R.mipmap.profile_placeholder)
@@ -156,6 +204,53 @@ public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.Vi
         notifyDataSetChanged();
     }
 
+    private void deletePost(ViewHolder holder, Post post){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
+        builder.setMessage("Are You Sure?");
+        builder.setTitle("Delete Post? ");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String whereClause = "postId = '" + post.getObjectId() + "'";
+                Backendless.Data.of(ReadLaterTabel.class).remove(whereClause, new AsyncCallback<Integer>() {
+                    @Override
+                    public void handleResponse(Integer response) {
+                        Log.i("TAG", "post ready to be deleted");
+                        Backendless.Data.of(Post.class).remove(post, new AsyncCallback<Long>() {
+                            @Override
+                            public void handleResponse(Long response) {
+                                Toast.makeText(parent.getContext(), "Post Deleted Successfully ", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void handleFault(BackendlessFault fault) {
+                                Log.i("TAG", "handleFault: " + fault.getMessage());
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void handleFault(BackendlessFault fault) {
+                        Log.i("TAG", "handleFault: " + fault.getMessage());
+                    }
+                });
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
     private String getDuration(Date date){
         Date now = new Date();
         long duration = TimeUnit.MILLISECONDS.toSeconds( now.getTime() - date.getTime());
@@ -199,14 +294,27 @@ public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.Vi
         return dataList.size();
     }
 
+
+//    Menu Item click Listener
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.editPostOP:
+
+                break;
+        }
+        return false;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private  TextView cardTitleTV;
         private  TextView cardSubTitleTV;
         private  TextView descriptionHeaderTV;
         private  TextView descriptionTV;
         private  ImageView cardImage;
-        private ImageView   thumbnail;
+        private ImageView   thumbnail, optionBTN;
         private  Button moreBTN, readLaterBTN;
+        private MenuItem deletePostOP;
         private boolean expanded = false;
 
         public ViewHolder(@NonNull View itemView) {
@@ -219,6 +327,7 @@ public class CardsRecyclerView extends RecyclerView.Adapter<CardsRecyclerView.Vi
             moreBTN = itemView.findViewById(R.id.cardMoreButton);
             thumbnail = itemView.findViewById(R.id.cardThumbnail);
             readLaterBTN = itemView.findViewById(R.id.cardReadLaterButton);
+            optionBTN = itemView.findViewById(R.id.optionsBTN);
         }
 
         public void setExpanded(boolean expanded) {
